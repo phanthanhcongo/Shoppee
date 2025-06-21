@@ -1,22 +1,24 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import OAuthCallback from './pages/OAuthCallback';
+import "./assets/styles/index.css";
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    axios.get('http://localhost:8000/api/hello')
-      .then((res) => setMessage(res.data.message))
-      .catch((err) => console.error('API Error:', err));
-  }, []);
-
   return (
-     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
-      <div className="bg-white border-4 border-blue-500 rounded-xl shadow-md p-8 max-w-md w-full text-center">
-        <h1 className="text-3xl font-bold text-blue-600 mb-4">React + Lar</h1>
-        <p className="text-gray-700 text-lg">{message || 'Đang tải...'}</p>
-      </div>
-    </div>
+    <>
+      <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/oauth-callback" element={<OAuthCallback />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer />
+    </>
   );
 }
 

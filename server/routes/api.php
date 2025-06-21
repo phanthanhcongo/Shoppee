@@ -1,7 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 
-Route::get('/hello', function () {
-    return response()->json(['message' => 'Hello from Laravel 12!']);
-});
+Route::post('/login', [AuthController::class, 'login']);
